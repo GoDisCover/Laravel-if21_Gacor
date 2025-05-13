@@ -12,6 +12,7 @@
                   <div class="card-header">
                     <h3 class="card-title">Prodi</h3>
                     <div class="card-tools">
+                      
                       <button
                         type="button"
                         class="btn btn-tool"
@@ -33,7 +34,8 @@
                   </div>
                   <div class="card-body">
                     <table class="table">
-                        <thead>
+                      <a href="{{route('prodi.create')}}" class="btn btn-primary">Tambah </a>  
+                      <thead>
                             <tr>
                                 <th>Nama</th>
                                 <th>Singkatan</th>

@@ -22,6 +22,7 @@ class ProdiController extends Controller
     public function create()
     {
         //
+        return view('Fakultas.create');
     }
 
     /**
@@ -30,6 +31,15 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->validate([
+            'nama'=> 'required|unique:fakultas',
+            'singkatan'=> 'required',
+            'nama_dekan'=> 'required',
+            'nama_wadek'=> 'required',
+        ]);
+        Fakultas::create($input);
+        return redirect()->route('fakultas.index')->with('Success','Fakultas berhasil disimpan');
+    
     }
 
     /**

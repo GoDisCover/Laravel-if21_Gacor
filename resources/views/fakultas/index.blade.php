@@ -2,8 +2,6 @@
 
 @section('title','Fakultas')
 @section('content')
-
-
 <!--begin::Row-->
             <div class="row">
               <div class="col-12">
@@ -32,6 +30,7 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <a href="{{route('fakultas.create')}}" class="btn btn-primary">Tambah </a>
                     <table class="table">
                         <thead>
                             <tr>
