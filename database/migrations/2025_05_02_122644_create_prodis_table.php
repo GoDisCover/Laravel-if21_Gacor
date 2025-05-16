@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('nama',30);
-            $table->char('singakatan',2);
+            $table->string('singakatan',2);
             $table->string('Kaprodi',30);
             $table->string('Sekretaris',30);
             $table->uuid('fakultas_id');

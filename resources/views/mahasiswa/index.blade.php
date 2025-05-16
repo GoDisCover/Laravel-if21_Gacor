@@ -33,6 +33,7 @@
                   </div>
                   <div class="card-body">
                     <table class="table">
+                     <a href="{{route('mahasiswa.create')}}" class="btn btn-primary">Tambah </a>  
                         <thead>
                             <tr>
                                 <th>Nama</th>
