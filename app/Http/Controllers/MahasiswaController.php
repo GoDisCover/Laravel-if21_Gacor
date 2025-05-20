@@ -13,9 +13,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
         $mahasiswa = Mahasiswa::all();
-        return view('mahasiswa.index',compact('mahasiswa'));
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -23,9 +22,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
         $prodi = Prodi::all();
-        return view('Mahasiswa.create',compact('prodi'));
+        return view('mahasiswa.create', compact('prodi'));
     }
 
     /**
@@ -33,26 +31,25 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $input = $request->validate([
-            'nama'=> 'required',
-            'npm'=> 'required|unique:mahasiswas',
-            'jk'=> 'required',
-            'tanggal_lahir'=> 'required|date',
-            'tempat_lahir'=> 'required',
-            'asal_sma'=> 'required',
-            'foto'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'prodi_id'=>'required|exists:prodi,id',
+            'nama' => 'required',
+            'npm' => 'required|unique:mahasiswas',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'jk' => 'required',
+            'asal_sma' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'prodi_id' => 'required',
         ]);
 
-        if($request->hasFile('foto')){
+        if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . ',' $file->getClientOriginalExtension();
-            $file->move(public_path('images'),$filename);
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images'), $filename);
             $input['foto'] = $filename;
         }
         Mahasiswa::create($input);
-        return redirect()->route('Mahasiswa.index')->with('Success','Mahasiswa berhasil disimpan');
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa created successfully.');
     }
 
     /**

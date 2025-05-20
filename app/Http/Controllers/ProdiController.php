@@ -14,7 +14,7 @@ class ProdiController extends Controller
     public function index()
     {
         $prodi = Prodi::all(); // SELECT * from prodi
-        return view('prodi.index', compact('prodi'))->with('prodi',$prodi);
+        return view('prodi.index', compact('prodi'));
     }
 
     /**
@@ -22,9 +22,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
         $fakultas = Fakultas::all();
-        return view('prodi.create',compact('fakultas'));
+        return view('prodi.create', compact('fakultas'));
     }
 
     /**
@@ -33,16 +32,6 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         //
-        $input = $request->validate([
-            'nama'=> 'required|unique:prodi',
-            'singakatan'=> 'required',
-            'Kaprodi'=> 'required',
-            'Sekretaris'=> 'required',
-            'fakultas_id'=> 'required|exists:fakultas,id',
-        ]);
-        Prodi::create($input);
-        return redirect()->route('prodi.index')->with('Success','Prodi berhasil disimpan');
-    
     }
 
     /**

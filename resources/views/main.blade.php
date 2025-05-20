@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
@@ -6,7 +7,7 @@
     <title>AdminLTE 4 | @yield('title')</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="AdminLTE 4 | @yield('title')" />
+    <meta name="title" content="AdminLTE 4 | Unfixed Sidebar" />
     <meta name="author" content="ColorlibHQ" />
     <meta
       name="description"
@@ -309,21 +310,20 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ url('fakultas') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                <a class='nav-link' href='{{ route('fakultas.index') }}'>
+                  <i class="nav-icon bi bi-map"></i>
                   <p>Fakultas</p>
                 </a>
               </li>
-
-            <li class="nav-item">
+              <li class="nav-item">
                 <a class='nav-link' href='{{ route('prodi.index') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                  <i class="nav-icon bi bi-microsoft"></i>
                   <p>Program Studi</p>
                 </a>
-            </li>
+              </li>
               <li class="nav-item">
-                <a class='nav-link' href='{{ url('/mahasiswa    ') }}'>
-                  <i class="nav-icon bi bi-palette"></i>
+                <a class='nav-link' href='{{ route('mahasiswa.index') }}'>
+                  <i class="nav-icon bi bi-people"></i>
                   <p>Mahasiswa</p>
                 </a>
               </li>
@@ -359,9 +359,7 @@
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">
-            <!--begin::Row-->
-            @yield('content')
-            <!--end::Row-->
+          @yield('content')  
           </div>
         </div>
         <!--end::App Content-->

@@ -2,15 +2,29 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
 {
-    //
-    // use HasUlids;
-    protected $table = 'mahasiswa';
-    protected $fillable = ['nama','npm','jk','tanggal_lahir','tempat_lahir','asal_sma','prodi.id'];
-    public function prodi(){
-        return $this->belongsTo(Prodi::class,'prodi_id','id');
+    use HasUuids;
+    protected $table = 'mahasiswas';
+
+    protected $fillable = [
+        'nama',
+        'npm',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jk',
+        'asal_sma',
+        'foto',
+        'prodi_id'
+    ];
+    protected $casts = [
+        'tanggal_lahir' => 'date',
+    ];
+
+    public function prodi() {
+        return $this->belongsTo(Prodi::class, 'prodi_id', 'id');
     }
 }
