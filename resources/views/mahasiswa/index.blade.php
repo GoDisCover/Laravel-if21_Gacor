@@ -34,6 +34,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>Foto</th>
                             <th>NPM</th>
                             <th>Nama</th>
                             <th>Program Studi</th>
@@ -43,6 +44,7 @@
                     <tbody>
                         @foreach ($mahasiswa as $item)
                         <tr>
+                            <td><img src=" {{ asset('images/'. $item->foto)  }}" width="80px" /></td>
                             <td>{{ $item->npm }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->prodi->nama }}</td>

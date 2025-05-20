@@ -16,9 +16,9 @@ return new class extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('nama',30);
-            $table->string('singakatan',2);
-            $table->string('Kaprodi',30);
-            $table->string('Sekretaris',30);
+            $table->string('singkatan',2);
+            $table->string('kaprodi',30);
+            $table->string('sekretaris',30);
             $table->uuid('fakultas_id');
             $table->foreign('fakultas_id',)->references('id')->on('fakultas')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();

@@ -33,7 +33,7 @@ class MahasiswaController extends Controller
     {
         $input = $request->validate([
             'nama' => 'required',
-            'npm' => 'required|unique:mahasiswas',
+            'npm' => 'required|unique:mahasiswa',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required|date',
             'jk' => 'required',
@@ -45,7 +45,10 @@ class MahasiswaController extends Controller
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images'), $filename);
+            // cara ke-1 upload ke dalam folder public
+            // $file->move(public_path('images'), $filename);
+            // cara ke-2 upload ke dalam folder storage
+            $file->move(public_path('images'), $filename); 
             $input['foto'] = $filename;
         }
         Mahasiswa::create($input);

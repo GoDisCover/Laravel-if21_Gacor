@@ -32,6 +32,16 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->validate([
+            'nama' => 'required',
+            'singkatan' => 'required',
+            'kaprodi' => 'required',
+            'sekretaris' => 'required',
+            'fakultas_id' => 'required',
+        ]);
+
+        Prodi::create($input);
+        return redirect()->route('prodi.index')->with('success', 'Mahasiswa created successfully.');
     }
 
     /**
