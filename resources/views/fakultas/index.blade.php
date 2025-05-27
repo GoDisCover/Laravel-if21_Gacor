@@ -47,6 +47,17 @@
                             <td>{{ $item->singkatan }}</td>
                             <td>{{ $item->nama_dekan }}</td>
                             <td>{{ $item->nama_wadek }}</td>
+                            <td>
+                                <a href="{{route('fakultas.edit',$item->id)}}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                <form method="POST" action="{{ route('fakultas.destroy', $item->id) }}">
+                                    @csrf
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                        data-toggle="tooltip" title='Delete'
+                                        data-nama='{{ $item->nama }}'>Hapus
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

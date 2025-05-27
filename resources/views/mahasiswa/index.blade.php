@@ -49,6 +49,16 @@
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->prodi->nama }}</td>
                             <td>{{ $item->prodi->fakultas->nama }}</td>
+                            <td>
+                               
+                                <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                    @csrf
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                        data-toggle="tooltip" title='Delete'
+                                        data-nama='{{ $item->nama }}'>Hapus</button>
+                                    </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

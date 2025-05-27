@@ -61,6 +61,9 @@ class FakultasController extends Controller
     public function edit(Fakultas $fakultas)
     {
         //
+        $fakultas = Fakultas::findOrFail($fakultas);
+        // dd($fakultas);
+        return view('fakultas.edit',compact('fakultas'));
     }
 
     /**
@@ -69,6 +72,17 @@ class FakultasController extends Controller
     public function update(Request $request, Fakultas $fakultas)
     {
         //
+        $fakultas = Fakultas::findOrFail($fakultas);
+
+        $input = $request->validate([
+            'nama' => 'required',
+            'singkatan' => 'required',
+            'nama_dekan' => 'required',
+            'nama_wadek'=>'required'
+        ]);
+        $fakultas->update($input);
+        
+        return redirect()->route('fakultas.index')->with('success','Fakultas Berhasil diubah');
     }
 
     /**
