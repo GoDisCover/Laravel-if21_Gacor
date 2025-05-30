@@ -30,7 +30,7 @@
             </div>
             </div>
             <div class="card-body">
-                <a href="{{ route('prodi.create') }}" class="btn btn-primary">Tambah</a>
+                <a href="{{ route('prodi.create') }}" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-plus-fill"></i> Tambah</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -38,6 +38,7 @@
                             <th>Kaprodi</th>
                             <th>Sekretaris</th>
                             <th>Nama Fakultas</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,13 +49,13 @@
                             <td>{{ $item->sekretaris }}</td>
                             <td>{{ $item->fakultas->nama }}</td>
                             <td>
-                                <form method="POST" action="{{ route('fakultas.destroy', $item->id) }}">
-                                    @csrf
-                                    <input name="_method" type="hidden" value="DELETE">
-                                    <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
-                                        data-toggle="tooltip" title='Delete'
-                                        data-nama='{{ $item->nama }}'>Hapus
-                                    </button>
+                                <a href="{{ route('prodi.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                <form method="POST" action="{{ route('prodi.destroy', $item->id) }}" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger btn-rounded show_confirm"
+                                    data-toggle="tooltip" title='Delete'
+                                    data-nama='{{ $item->nama }}'><i class="bi bi-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
