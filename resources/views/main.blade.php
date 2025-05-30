@@ -281,33 +281,12 @@
               data-accordion="false"
             >
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('/dashboard') }}" class="nav-link">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
                     Dashboard
-                    <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a class='nav-link' href='/dist/pages/'>
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Dashboard v1</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class='nav-link' href='/dist/pages/index2'>
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Dashboard v2</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class='nav-link' href='/dist/pages/index3'>
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Dashboard v3</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ route('fakultas.index') }}'>
