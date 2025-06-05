@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\sesi;
+use App\Models\Mata_Kuliah;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 
-class SesiController extends Controller
+class MataKuliahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class SesiController extends Controller
     public function index()
     {
         //
-        $sesi = Sesi::all();
-        return view('sesi.index', compact('sesi'));
+        $mata_kuliah = Mata_Kuliah::all();
+        return view('mata_kuliah.index', compact('mata_kuliah'));
     }
 
     /**
@@ -23,8 +24,8 @@ class SesiController extends Controller
     public function create()
     {
         //
-        $sesi = Sesi::all();
-        return view('sesi.create');
+        $prodi = Prodi::all();
+        return view('mata_kuliah.create', compact('prodi'));
     }
 
     /**
@@ -33,21 +34,19 @@ class SesiController extends Controller
     public function store(Request $request)
     {
         //
-         $input = $request->validate([
+        $input = $request->validate([
+            'kode_mk' => 'required',
             'nama' => 'required',
+            'prodi_id' => 'required',
         ]);
-
-        Sesi::create($input);
-
-        // redirect ke route fakultas.index
-        return redirect()->route('sesi.index')
-                         ->with('success', 'Sesi berhasil disimpan');
+        MataKuliah::create($input);
+        return redirect()->route('mata_kuliah.index')->with('success', 'Matakuliah created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(sesi $sesi)
+    public function show(mata_kuliah $mata_kuliah)
     {
         //
     }
@@ -55,7 +54,7 @@ class SesiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(sesi $sesi)
+    public function edit(mata_kuliah $mata_kuliah)
     {
         //
     }
@@ -63,7 +62,7 @@ class SesiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, sesi $sesi)
+    public function update(Request $request, mata_kuliah $mata_kuliah)
     {
         //
     }
@@ -71,7 +70,7 @@ class SesiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(sesi $sesi)
+    public function destroy(mata_kuliah $mata_kuliah)
     {
         //
     }
