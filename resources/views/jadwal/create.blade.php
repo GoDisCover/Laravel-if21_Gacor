@@ -10,7 +10,7 @@
                   <div class="card-header"><div class="card-title">Form Tambah Jadwal</div></div>
                   <!--end::Header-->
                   <!--begin::Form-->
-                  <form action="{{ route('matakuliah.store') }}" method="POST" enctype="multipart/form-data">
+                  <form action="{{ route('jadwal.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Body-->
                     <div class="card-body">
@@ -51,7 +51,7 @@
                         <label for="dosenid" class="form-label">Dosen</label>
                         <select name="dosenid" class="form-control">
                           @foreach ($users as $item)
-                            <option value="{{ $item->id }}" {{ old('dosenid') == $item->id ? "selected" : null }}> {{ $item->name }} </option>
+                            <option value="{{ $item->id }}" {{ old('dosenid') == $item->id ? "selected" : null }}> {{$new->category->name ?? 'None'}} </option>
                           @endforeach
                         </select>
                         @error('dosenid')

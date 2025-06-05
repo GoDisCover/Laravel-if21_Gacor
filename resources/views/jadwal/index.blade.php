@@ -50,7 +50,7 @@
                             <td>{{ $item->kode_smt }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->matakuliah->nama }}</td>
-                            <td>{{ $item->users->name }}</td>
+                            <td>{{ $new->category->name ?? 'None' }}</td>
                             <td>{{ $item->sesi->nama }}</td>
                             <td>
                                 <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
