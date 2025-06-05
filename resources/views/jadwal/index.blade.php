@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Mata Kuliah')
+@section('title', 'Jadwal')
 @section('content')
     <!--begin::Row-->
     <div class="row">
@@ -8,7 +8,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title">Mata Kuliah</h3>
+            <h3 class="card-title">Jadwal</h3>
             <div class="card-tools">
                 <button
                 type="button"
@@ -30,24 +30,30 @@
             </div>
             </div>
             <div class="card-body">
-                <a href="{{ route('matakuliah.create') }}" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-plus-fill"></i> Tambah</a>
+                <a href="{{ route('jadwal.create') }}" class="btn btn-sm btn-primary"><i class="bi bi-file-earmark-plus-fill"></i> Tambah</a>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Kode MataKuliah</th>
-                            <th>Nama</th>
-                            <th>Program Studi</th>
+                            <th>Tahun Akademik</th>
+                            <th>Kode Semester</th>
+                            <th>Kelas</th>
+                            <th>Matakuliah</th>
+                            <th>Dosen</th>
+                            <th>Sesi</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($matakuliah as $item)
+                        @foreach ($jadwal as $item)
                         <tr>
-                            <td>{{ $item->kodemk }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->prodi->nama }}</td>
+                            <td>{{ $item-> tahun_akademik }}</td>
+                            <td>{{ $item->kode_smt }}</td>
+                            <td>{{ $item->kelas }}</td>
+                            <td>{{ $item->matakuliah->nama }}</td>
+                            <td>{{ $item->users->name }}</td>
+                            <td>{{ $item->sesi->nama }}</td>
                             <td>
-                                <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
                                 <form method="POST" action="{{ route('matakuliah.destroy', $item->id) }}" class="d-inline">
                                 @csrf
                                 @method('DELETE')

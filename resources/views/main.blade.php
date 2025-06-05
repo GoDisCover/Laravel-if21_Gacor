@@ -318,6 +318,12 @@
                   <p>Matakuliah</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ route('jadwal.index') }}'>
+                  <i class="nav-icon bi bi-people"></i>
+                  <p>Jadwal</p>
+                </a>
+              </li>
             </ul>
             <!--end::Sidebar Menu-->
           </nav>
