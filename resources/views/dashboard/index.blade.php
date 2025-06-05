@@ -1,46 +1,40 @@
 @extends('main')
 
-@section('title','Dashboard')
+@section('title', 'Dashboard')
 @section('content')
-<!-- html -->
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
-    <div id="container"></div>
-    <p class="highcharts-description">
-        A basic column chart comparing estimated corn and wheat production
-        in some countries.
 
-        The chart is making use of the axis crosshair feature, to highlight
-        the hovered country.
-    </p>
-</figure>
-<figure class="highcharts-figure">
-    <div id="container1"></div>
-    <p class="highcharts-description">
-        A basic column chart comparing estimated corn and wheat production
-        in some countries.
 
-        The chart is making use of the axis crosshair feature, to highlight
-        the hovered country.
-    </p>
-</figure>
-<figure class="highcharts-figure">
-    <div id="container2"></div>
-    <p class="highcharts-description">
-        A basic column chart comparing estimated corn and wheat production
-        in some countries.
+<div class="row">
+    <div class="col-lg-3">
+       <figure class="highcharts-figure">
+           <div id="container_tugas"></div>
+       </figure>
+   </div>
+    <div class="col-lg-3">
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+        </figure>
+    </div>
+    <div class="col-lg-3">
+        <figure class="highcharts-figure">
+            <div id="container1"></div>
+        </figure>
+    </div>
+    <div class="col-lg-3">
+        <figure class="highcharts-figure">
+            <div id="container2"></div>
+        </figure>
+    </div>
+</div>
 
-        The chart is making use of the axis crosshair feature, to highlight
-        the hovered country.
-    </p>
-</figure>
-<!-- CSS -->
- <style>
-.highcharts-figure,
+<style>
+    .highcharts-figure,
 .highcharts-data-table table {
     min-width: 310px;
     max-width: 800px;
@@ -90,26 +84,31 @@
 .highcharts-description {
     margin: 0.3rem 10px;
 }
+
 </style>
-<!-- Javascript -->
- <script>
- Highcharts.chart('container', {
+
+
+<script>
+Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Corn vs wheat estimated production for 2023'
+        text: 'Jumlah Mahasiswa'
     },
     subtitle: {
         text:
-            'Source: Universitas MDP'
+            'Source: Universitas MDP '
     },
     xAxis: {
-        categories: [@foreach ($mahasiswaprodi as $item )'{{ $item->nama }}',
-        @endforeach],
+        categories: [
+            @foreach ($mahasiswaprodi as $item)
+            '{{ $item -> nama }}'@if (!$loop->last),@endif
+            @endforeach
+        ],
         crosshair: true,
         accessibility: {
-            description: 'Prodi'
+            description: 'Countries'
         }
     },
     yAxis: {
@@ -119,7 +118,7 @@
         }
     },
     tooltip: {
-        valueSuffix: 'Mahasiswa'
+        valueSuffix: 'Orang'
     },
     plotOptions: {
         column: {
@@ -129,31 +128,36 @@
     },
     series: [
         {
-            name: 'Mahasiswa',
-            data: [
-                @foreach ($mahasiswaprodi as $item ) {{ $item->jumlah }},
-        @endforeach]
-        },
-        
+            name: 'mahasiswa',
+            data: [@foreach ($mahasiswaprodi as $item)
+            {{  $item -> jumlah }}@if (!$loop->last),@endif
+            @endforeach]
+        }
     ]
 });
+
+
 Highcharts.chart('container1', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Corn vs wheat estimated production for 2023'
+        text: 'Jumlah Mahasiswa Berdasarkan Asal Sma'
     },
     subtitle: {
         text:
-            'Source: Universitas MDP'
+            'Source: Universitas MDP '
     },
     xAxis: {
-        categories: [@foreach ($mahasiswasma as $item )'{{ $item->asal_sma }}',
-        @endforeach],
+        categories: [
+            @foreach ($mahasiswasma as $item)
+            '{{ $item -> asal_sma }}'@if (!$loop->last),@endif
+            @endforeach
+
+        ],
         crosshair: true,
         accessibility: {
-            description: 'Prodi'
+            description: 'Program Studi'
         }
     },
     yAxis: {
@@ -163,7 +167,7 @@ Highcharts.chart('container1', {
         }
     },
     tooltip: {
-        valueSuffix: 'Mahasiswa'
+        valueSuffix: '(Orang)'
     },
     plotOptions: {
         column: {
@@ -173,30 +177,35 @@ Highcharts.chart('container1', {
     },
     series: [
         {
-            name: 'Mahasiswa',
-            data: [@foreach ($mahasiswasma as $item ){{ $item->jumlah }},
-        @endforeach]
-        },
-        
+            name: 'mahasiswa',
+            data: [@foreach ($mahasiswasma as $item)
+            {{  $item -> jumlah }}@if (!$loop->last),@endif
+            @endforeach]
+        }
     ]
 });
+
 Highcharts.chart('container2', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Corn vs wheat estimated production for 2023'
+        text: 'Jumlah Tahun Masuk'
     },
     subtitle: {
         text:
-            'Source: Universitas MDP'
+            'Source: Universitas MDP '
     },
     xAxis: {
-        categories: [@foreach ($mahasiswatahun as $item )'{{ $item->tahun }}',
-        @endforeach],
+        categories: [
+            @foreach ($mahasiswatahun as $item)
+            '20{{ $item -> tahun }}'@if (!$loop->last),@endif
+            @endforeach
+
+        ],
         crosshair: true,
         accessibility: {
-            description: 'Prodi'
+            description: 'Tahun Masuk'
         }
     },
     yAxis: {
@@ -206,7 +215,7 @@ Highcharts.chart('container2', {
         }
     },
     tooltip: {
-        valueSuffix: 'Mahasiswa'
+        valueSuffix: ' (Orang)'
     },
     plotOptions: {
         column: {
@@ -216,13 +225,72 @@ Highcharts.chart('container2', {
     },
     series: [
         {
-            name: 'Mahasiswa',
+            name: 'mahasiswa',
+            data: [@foreach ($mahasiswatahun as $item)
+            {{  $item -> jumlah }}@if (!$loop->last),@endif
+            @endforeach]
+        }
+    ]
+});
+Highcharts.chart('container_tugas', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Jumlah Kelas Setiap Prodi per Tahun'
+    },
+    subtitle: {
+        text:
+            'Source: Universitas MDP '
+    },
+    xAxis: {
+        categories: [
+            @foreach ($kelasperprodi as $item)
+            '{{ $item->tahun_akademik }}'@if (!$loop->last),@endif
+            @endforeach
+
+        ],
+        crosshair: true,
+        accessibility: {
+            description: 'Tahun Masuk'
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Jumlah Kelas'
+        }
+    },
+    tooltip: {
+        valueSuffix: ' (Kelas)'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [
+        @foreach (collect($kelasperprodi)->pluck('nama')->unique() as $prodi)
+        {
+            name: '{{ $prodi }}',
             data: [
-                @foreach ($mahasiswatahun as $item ) {{ $item->jumlah }},
-        @endforeach]
-        },
-        
+                @foreach (collect($kelasperprodi)->pluck('tahun_akademik')->unique() as $tahun)
+                    {{
+                        optional(
+                            collect($kelasperprodi)
+                                ->first(function($row) use ($prodi, $tahun) {
+                                    return $row->nama == $prodi && $row->tahun_akademik == $tahun;
+                                })
+                        )->jumlah ?? 0
+                    }}@if (!$loop->last),@endif
+                @endforeach
+            ]
+        }@if (!$loop->last),@endif
+        @endforeach
     ]
 });
 </script>
+
+
 @endsection

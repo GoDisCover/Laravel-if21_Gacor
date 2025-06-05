@@ -50,7 +50,7 @@
                             <td>{{ $item->kode_smt }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->matakuliah->nama }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->dosen->name }}</td>
                             <td>{{ $item->sesi->nama }}</td>
                             <td>
                                 <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>

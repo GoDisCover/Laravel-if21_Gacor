@@ -12,7 +12,7 @@ class jadwal extends Model
     public function matakuliah() {
         return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id', 'id');
     }
-    public function dosenid() {
+    public function dosen() {
         return $this->belongsTo(User::class, 'dosenid', 'id');
     }
     public function sesi() {
