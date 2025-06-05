@@ -15,16 +15,16 @@
                     <!--begin::Body-->
                     <div class="card-body">
                       <div class="mb-3">
-                        <label for="nama" class="form-label">Kode MataKuliah</label>
-                        <input type="text" class="form-control" name="nama" value="{{ old('nama') }}">
-                        @error('nama')
+                        <label for="kodemk" class="form-label">Kode MataKuliah</label>
+                        <input type="text" class="form-control" name="kodemk">
+                        @error('kodemk')
                           <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="mb-3">
-                        <label for="npm" class="form-label">Nama MataKuliah</label>
-                        <input type="text" class="form-control" name="npm" value="{{ old('npm') }}">
-                        @error('npm')
+                        <label for="nama" class="form-label">Nama MataKuliah</label>
+                        <input type="text" class="form-control" name="nama">
+                        @error('nama')
                           <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>

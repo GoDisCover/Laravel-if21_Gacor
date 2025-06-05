@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sesi', function (Blueprint $table) {
-            $table->biginteger("id")->autoIncrement()->primarykey();
-            $table->string("nama",20);
+        Schema::create('jadwal', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sesis');
+        Schema::dropIfExists('jadwal');
     }
 };

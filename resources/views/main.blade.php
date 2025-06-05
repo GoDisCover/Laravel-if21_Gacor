@@ -306,6 +306,18 @@
                   <p>Mahasiswa</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ route('sesi.index') }}'>
+                  <i class="nav-icon bi bi-people"></i>
+                  <p>Sesi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ route('matakuliah.index') }}'>
+                  <i class="nav-icon bi bi-people"></i>
+                  <p>Matakuliah</p>
+                </a>
+              </li>
             </ul>
             <!--end::Sidebar Menu-->
           </nav>

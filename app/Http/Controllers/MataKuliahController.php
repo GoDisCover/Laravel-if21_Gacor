@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mata_Kuliah;
+use App\Models\MataKuliah;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -14,8 +14,8 @@ class MataKuliahController extends Controller
     public function index()
     {
         //
-        $mata_kuliah = Mata_Kuliah::all();
-        return view('mata_kuliah.index', compact('mata_kuliah'));
+        $matakuliah = MataKuliah::all();
+        return view('matakuliah.index', compact('matakuliah'));
     }
 
     /**
@@ -25,7 +25,7 @@ class MataKuliahController extends Controller
     {
         //
         $prodi = Prodi::all();
-        return view('mata_kuliah.create', compact('prodi'));
+        return view('matakuliah.create', compact('prodi'));
     }
 
     /**
@@ -35,18 +35,18 @@ class MataKuliahController extends Controller
     {
         //
         $input = $request->validate([
-            'kode_mk' => 'required',
+            'kodemk' => 'required',
             'nama' => 'required',
             'prodi_id' => 'required',
         ]);
         MataKuliah::create($input);
-        return redirect()->route('mata_kuliah.index')->with('success', 'Matakuliah created successfully.');
+        return redirect()->route('matakuliah.index')->with('success', 'Matakuliah created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(mata_kuliah $mata_kuliah)
+    public function show(matakuliah $matakuliah)
     {
         //
     }
@@ -54,7 +54,7 @@ class MataKuliahController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(mata_kuliah $mata_kuliah)
+    public function edit(matakuliah $matakuliah)
     {
         //
     }
@@ -62,7 +62,7 @@ class MataKuliahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, mata_kuliah $mata_kuliah)
+    public function update(Request $request, matakuliah $matakuliah)
     {
         //
     }
@@ -70,7 +70,7 @@ class MataKuliahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(mata_kuliah $mata_kuliah)
+    public function destroy(matakuliah $matakuliah)
     {
         //
     }

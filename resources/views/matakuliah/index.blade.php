@@ -34,21 +34,21 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Kode_MK</th>
+                            <th>Kode MataKuliah</th>
                             <th>Nama</th>
                             <th>Program Studi</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mata_kuliah as $item)
+                        @foreach ($matakuliah as $item)
                         <tr>
-                            <td>{{ $item->kode_mk }}</td>
+                            <td>{{ $item->kodemk }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->prodi->nama }}</td>
                             <td>
-                                <a href="{{ route('mata_kuliah.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                                <form method="POST" action="{{ route('mata_kuliah.destroy', $item->id) }}" class="d-inline">
+                                <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                <form method="POST" action="{{ route('matakuliah.destroy', $item->id) }}" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger btn-rounded show_confirm"

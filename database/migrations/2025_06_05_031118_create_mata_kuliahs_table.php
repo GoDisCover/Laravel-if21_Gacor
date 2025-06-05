@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mata_kuliah', function (Blueprint $table) {
-            $table->biginteger("id")->autoIncrement()->primarykey();
-            $table->string("kode_mk");
-            $table->string("nama");
+        Schema::create('matakuliah', function (Blueprint $table) {
+            $table->biginteger("id")->autoIncrement();
+            $table->primary('id');
+            $table->string("kodemk",20);
+            $table->string("nama",20);
             $table->uuid('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('prodi')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mata_kuliahs');
+        Schema::dropIfExists('matakuliah');
     }
 };
