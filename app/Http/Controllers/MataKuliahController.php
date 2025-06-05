@@ -57,6 +57,8 @@ class MataKuliahController extends Controller
     public function edit(matakuliah $matakuliah)
     {
         //
+        $prodi = Prodi::all();
+        return view('matakuliah.edit', compact('prodi', 'matakuliah'));
     }
 
     /**
@@ -65,13 +67,24 @@ class MataKuliahController extends Controller
     public function update(Request $request, matakuliah $matakuliah)
     {
         //
+    $input = $request->validate([
+        'kodemk' => 'required',
+        'nama' => 'required',
+        'prodi_id' => 'required'
+    ]);
+
+    $matakuliah->update($input);
+    return redirect()->route('matakuliah.index')->with('success', 'Matakuliah berhasil diubah');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(matakuliah $matakuliah)
-    {
-        //
-    }
+{
+    $matakuliah->delete();
+
+    return redirect()->route('matakuliah.index')->with('success', 'Matakuliah berhasil dihapus');
+}
 }

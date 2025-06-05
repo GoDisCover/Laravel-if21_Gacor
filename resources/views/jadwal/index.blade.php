@@ -50,11 +50,11 @@
                             <td>{{ $item->kode_smt }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>{{ $item->matakuliah->nama }}</td>
-                            <td>{{ $new->category->name ?? 'None' }}</td>
+                            <td>{{ $item->name }}</td>
                             <td>{{ $item->sesi->nama }}</td>
                             <td>
                                 <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill"></i></a>
-                                <form method="POST" action="{{ route('matakuliah.destroy', $item->id) }}" class="d-inline">
+                                <form method="POST" action="{{ route('jadwal.destroy', $item->id) }}" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger btn-rounded show_confirm"

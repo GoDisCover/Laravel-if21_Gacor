@@ -23,7 +23,6 @@ class SesiController extends Controller
     public function create()
     {
         //
-        $sesi = Sesi::all();
         return view('sesi.create');
     }
 
@@ -32,14 +31,11 @@ class SesiController extends Controller
      */
     public function store(Request $request)
     {
-        //
          $input = $request->validate([
             'nama' => 'required',
         ]);
 
         Sesi::create($input);
-
-        // redirect ke route fakultas.index
         return redirect()->route('sesi.index')
                          ->with('success', 'Sesi berhasil disimpan');
     }
@@ -58,6 +54,7 @@ class SesiController extends Controller
     public function edit(sesi $sesi)
     {
         //
+        return view('sesi.edit', compact('sesi'));
     }
 
     /**
@@ -66,6 +63,12 @@ class SesiController extends Controller
     public function update(Request $request, sesi $sesi)
     {
         //
+        $input = $request->validate([
+            'nama' => 'required',
+        ]);
+
+        $sesi->update($input);
+        return redirect()->route('sesi.index')->with('success', 'Sesi berhasil diubah');
     }
 
     /**
@@ -74,5 +77,9 @@ class SesiController extends Controller
     public function destroy(sesi $sesi)
     {
         //
+    $sesi->delete();
+
+    return redirect()->route('sesi.index')->with('success', 'Sesi berhasil dihapus');
+
     }
 }
