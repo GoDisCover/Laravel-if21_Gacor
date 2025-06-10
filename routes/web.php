@@ -11,7 +11,8 @@ use App\Http\Controllers\SesiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect()->route('login');
 });
 
 // Route::get('/dashboard', function () {
@@ -23,12 +24,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('/fakultas', FakultasController::class);
 Route::resource('/prodi', ProdiController::class);
 Route::resource('/mahasiswa', MahasiswaController::class);
 Route::resource('/sesi', SesiController::class);
 Route::resource('/matakuliah', MataKuliahController::class);
 Route::resource('/jadwal', JadwalController::class);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
