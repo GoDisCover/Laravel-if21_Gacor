@@ -13,7 +13,7 @@ class SesiController extends Controller
     public function index()
     {
         //
-        $sesi = Sesi::all();
+        $sesi = sesi::all();
         return view('sesi.index', compact('sesi'));
     }
 
