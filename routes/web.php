@@ -30,6 +30,6 @@ Route::resource('/mahasiswa', MahasiswaController::class);
 Route::resource('/sesi', SesiController::class);
 Route::resource('/matakuliah', MataKuliahController::class);
 Route::resource('/jadwal', JadwalController::class);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
