@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\sesi;
+use App\Models\Sesi;
 use Illuminate\Http\Request;
 
 class SesiController extends Controller
