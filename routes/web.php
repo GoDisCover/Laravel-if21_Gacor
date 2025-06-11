@@ -8,6 +8,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\MateriController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,6 +31,7 @@ Route::resource('/mahasiswa', MahasiswaController::class);
 Route::resource('/sesi', SesiController::class);
 Route::resource('/matakuliah', MataKuliahController::class);
 Route::resource('/jadwal', JadwalController::class);
+Route::resource('/materi', MateriController::class);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

@@ -42,7 +42,7 @@
                             <option value="{{ $item->id }}" {{ old('mata_kuliah_id') == $item->id ? "selected" : null }}> {{ $item->nama }} </option>
                           @endforeach
                         </select>
-                        @error('mata_kuliah_id')
+                        @error('matakuliah_id')
                           <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>

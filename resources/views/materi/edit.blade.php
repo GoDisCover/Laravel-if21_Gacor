@@ -1,0 +1,58 @@
+@extends('main')
+
+@section('title', 'Edit Materi')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-primary card-outline mb-4">
+                <div class="card-header">
+                    <div class="card-title">Form Ubah Materi</div>
+                </div>
+                <form action="{{ route('materi.update', $materi->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="mata_kuliah_id" class="form-label">Mata Kuliah ID</label>
+                            <input type="number" class="form-control" name="mata_kuliah_id" value="{{ old('mata_kuliah_id', $materi->mata_kuliah_id) }}">
+                            @error('mata_kuliah_id')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="dosenid" class="form-label">Dosen ID</label>
+                            <input type="number" class="form-control" name="dosenid" value="{{ old('dosenid', $materi->dosenid) }}">
+                            @error('dosenid')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="pertemuan" class="form-label">Pertemuan</label>
+                            <input type="number" class="form-control" name="pertemuan" value="{{ old('pertemuan', $materi->pertemuan) }}">
+                            @error('pertemuan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="pokokbahasan" class="form-label">Pokok Bahasan</label>
+                            <input type="text" class="form-control" name="pokokbahasan" value="{{ old('pokokbahasan', $materi->pokokbahasan) }}">
+                            @error('pokokbahasan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="filemateri" class="form-label">File Materi</label>
+                            <input type="text" class="form-control" name="filemateri" value="{{ old('filemateri', $materi->filemateri) }}">
+                            @error('filemateri')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

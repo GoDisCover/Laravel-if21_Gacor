@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MahasiswaController extends Controller
 {
@@ -29,7 +30,7 @@ class MahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+        public function store(Request $request)
     {
         $input = $request->validate([
             'nama' => 'required',
@@ -38,20 +39,39 @@ class MahasiswaController extends Controller
             'tanggal_lahir' => 'required|date',
             'jk' => 'required',
             'asal_sma' => 'required',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'prodi_id' => 'required',
         ]);
 
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            // cara ke-1 upload ke dalam folder public
-            // $file->move(public_path('images'), $filename);
-            // cara ke-2 upload ke dalam folder storage
-            $file->storeAs('images', $filename);
+            try {
+                $file = $request->file('foto');
+                $response = Http::asMultipart()->post(
+                    'https://api.cloudinary.com/v1_1/' . env('ddxm3ypsz') . '/image/upload',
+                    [
+                        [
+                            'name'     => 'file',
+                            'contents' => fopen($file->getRealPath(), 'r'),
+                            'filename' => $file->getClientOriginalName(),
+                        ],
+                        [
+                            'name'     => 'upload_preset',
+                            'contents' => env('mahasiswa'),
+                        ],
+                    ]
+                );
 
-            $input['foto'] = $filename;
+                $result = $response->json();
+                if (isset($result['secure_url'])) {
+                    $input['foto'] = $result['secure_url'];
+                } else {
+                    return back()->withErrors(['foto' => 'Cloudinary upload error: ' . ($result['error']['message'] ?? 'Unknown error')]);
+                }
+            } catch (\Exception $e) {
+                return back()->withErrors(['foto' => 'Cloudinary error: ' . $e->getMessage()]);
+            }
         }
+
         Mahasiswa::create($input);
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa created successfully.');
     }
