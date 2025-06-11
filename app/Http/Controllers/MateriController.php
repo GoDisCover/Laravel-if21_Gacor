@@ -7,6 +7,7 @@ use App\Models\MataKuliah;
 use App\Models\User;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MateriController extends Controller
 {
@@ -33,9 +34,9 @@ class MateriController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-        'mata_kuliah_id' => 'required|integer',
+{
+    $validated = $request->validate([
+        'matakuliah_id' => 'required|integer',
         'dosenid' => 'required|integer',
         'pertemuan' => 'required|integer',
         'pokokbahasan' => 'required|string',
@@ -43,14 +44,35 @@ class MateriController extends Controller
     ]);
 
     if ($request->hasFile('filemateri')) {
-        $file = $request->file('filemateri');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('file', $filename);
-        $validated['filemateri'] = $filename;
+        try {
+            $file = $request->file('filemateri');
+            $response = Http::asMultipart()->post(
+                'https://api.cloudinary.com/v1_1/' . env('CLOUDINARY_CLOUD_NAME') . '/raw/upload',
+                [
+                    [
+                        'name'     => 'file',
+                        'contents' => fopen($file->getRealPath(), 'r'),
+                        'filename' => $file->getClientOriginalName(),
+                    ],
+                    [
+                        'name'     => 'upload_preset',
+                        'contents' => env('CLOUDINARY_UPLOAD_PRESET'),
+                    ],
+                ]
+            );
+
+            $result = $response->json();
+            if (isset($result['secure_url'])) {
+                $validated['filemateri'] = $result['secure_url'];
+            } else {
+                return back()->withErrors(['filemateri' => 'Cloudinary upload error: ' . ($result['error']['message'] ?? 'Unknown error')]);
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['filemateri' => 'Cloudinary error: ' . $e->getMessage()]);
+        }
     }
 
         Materi::create($validated);
-
         return redirect()->route('materi.index')->with('success', 'Materi created successfully.');
     }
 
@@ -78,7 +100,7 @@ class MateriController extends Controller
     public function update(Request $request, materi $materi)
     {
         $validated = $request->validate([
-            'mata_kuliah_id' => 'required|integer',
+            'matakuliah_id' => 'required|integer',
             'dosenid' => 'required|integer',
             'pertemuan' => 'required|integer',
             'pokokbahasan' => 'required|string',

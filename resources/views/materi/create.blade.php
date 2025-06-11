@@ -29,7 +29,9 @@
                         <label for="dosenid" class="form-label">Dosen</label>
                         <select name="dosenid" class="form-control">
                           @foreach ($users as $item)
-                            <option value="{{ $item->id }}" {{ old('users') == $item->id ? "selected" : null }}> {{$new->category->name ?? 'None'}} </option>
+                          <option value="{{ $item->id }}" {{ old('dosenid') == $item->id ? "selected" : null }}>
+                          {{ $item->name ?? 'None' }}
+                          </option>
                           @endforeach
                         </select>
                         @error('dosenid')

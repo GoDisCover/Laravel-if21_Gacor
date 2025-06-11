@@ -47,7 +47,7 @@ class MahasiswaController extends Controller
             try {
                 $file = $request->file('foto');
                 $response = Http::asMultipart()->post(
-                    'https://api.cloudinary.com/v1_1/' . env('ddxm3ypsz') . '/image/upload',
+                    'https://api.cloudinary.com/v1_1/' . env('CLOUDINARY_CLOUD_NAME') . '/image/upload',
                     [
                         [
                             'name'     => 'file',
@@ -55,15 +55,15 @@ class MahasiswaController extends Controller
                             'filename' => $file->getClientOriginalName(),
                         ],
                         [
-                            'name'     => 'mahasiswa',
-                            'contents' => env('mahasiswa'),
+                            'name'     => 'upload_preset',
+                            'contents' => env('CLOUDINARY_UPLOAD_PRESET'),
                         ],
                     ]
                 );
 
                 $result = $response->json();
-                if (isset($result['cloudinary://673284693382647:GZjRjaxSxsqXVjEyoLjHcxbY18g@ddxm3ypszl'])) {
-                    $input['foto'] = $result['cloudinary://673284693382647:GZjRjaxSxsqXVjEyoLjHcxbY18g@ddxm3ypsz'];
+                if (isset($result['secure_url'])) {
+                    $input['foto'] = $result['secure_url'];
                 } else {
                     return back()->withErrors(['foto' => 'Cloudinary upload error: ' . ($result['error']['message'] ?? 'Unknown error')]);
                 }

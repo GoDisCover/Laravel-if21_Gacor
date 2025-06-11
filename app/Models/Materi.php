@@ -9,7 +9,7 @@ class Materi extends Model
     protected $table = 'materi';
 
     protected $fillable = [
-        'mata_kuliah_id',
+        'matakuliah_id',
         'dosenid',
         'pertemuan',
         'pokokbahasan',
@@ -20,8 +20,5 @@ class Materi extends Model
     }
     public function dosen() {
         return $this->belongsTo(User::class, 'dosenid', 'id');
-    }
-    public function sesi() {
-        return $this->belongsTo(Sesi::class, 'sesi_id', 'id');
     }
 }
