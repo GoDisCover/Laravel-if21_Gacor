@@ -106,5 +106,11 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         //
+        if ($mahasiswa->cloudinary_public_id) {
+        (new UploadApi())->destroy($mahasiswa->cloudinary_public_id);
+    }
+
+    $mahasiswa->delete();
+    return redirect()->route('mahasiswa.index')->with('success', 'mahasiswa deleted successfully.');
     }
 }
