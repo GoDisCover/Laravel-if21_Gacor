@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use Cloudinary\Api\Upload\UploadApi;
 class MateriController extends Controller
 {
     /**
@@ -143,11 +143,13 @@ class MateriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(materi $materi)
-    {
-       Storage::delete('file/' . $materi->filemateri); // hapus file dari storage
-        $materi->delete();
-        return redirect()->route('materi.index')->with('success', 'Materi deleted successfully.');
-
+    public function destroy(Materi $materi)
+{
+    if ($materi->cloudinary_public_id) {
+        (new UploadApi())->destroy($materi->cloudinary_public_id);
     }
+
+    $materi->delete();
+    return redirect()->route('materi.index')->with('success', 'Materi deleted successfully.');
+}
 }

@@ -8,18 +8,18 @@
                 <div class="card-header">
                     <div class="card-title">Form Ubah Materi</div>
                 </div>
-                <form action="{{ route('materi.update', $materi->id) }}" method="POST">
+                <form action="{{ route('materi.update', $materi->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
                         <div class="mb-3">
-                        <label for="mata_kuliah_id" class="form-label">Mata Kuliah</label>
-                        <select name="mata_kuliah_id" class="form-control">
+                        <label for="matakuliah_id" class="form-label">Mata Kuliah</label>
+                        <select name="matakuliah_id" class="form-control">
                           @foreach ($matakuliah as $item)
-                            <option value="{{ $item->id }}" {{ old('mata_kuliah_id') == $item->id ? "selected" : null }}> {{ $item->nama }} </option>
+                            <option value="{{ $item->id }}" {{ old('matakuliah_id') == $item->id ? "selected" : null }}> {{ $item->nama }} </option>
                           @endforeach
                         </select>
-                        @error('mata_kuliah_id')
+                        @error('matakuliah_id')
                           <div class="text-danger">{{ $message }}</div>
                         @enderror
                       </div>
