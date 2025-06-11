@@ -55,15 +55,15 @@ class MahasiswaController extends Controller
                             'filename' => $file->getClientOriginalName(),
                         ],
                         [
-                            'name'     => 'upload_preset',
+                            'name'     => 'mahasiswa',
                             'contents' => env('mahasiswa'),
                         ],
                     ]
                 );
 
                 $result = $response->json();
-                if (isset($result['secure_url'])) {
-                    $input['foto'] = $result['secure_url'];
+                if (isset($result['cloudinary://673284693382647:GZjRjaxSxsqXVjEyoLjHcxbY18g@ddxm3ypszl'])) {
+                    $input['foto'] = $result['cloudinary://673284693382647:GZjRjaxSxsqXVjEyoLjHcxbY18g@ddxm3ypsz'];
                 } else {
                     return back()->withErrors(['foto' => 'Cloudinary upload error: ' . ($result['error']['message'] ?? 'Unknown error')]);
                 }
