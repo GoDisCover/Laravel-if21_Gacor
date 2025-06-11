@@ -107,11 +107,33 @@ class MateriController extends Controller
             'filemateri' => 'required|file|mimes:pdf,doc,docx,ppt,pptx|max:2048',
         ]);
         if ($request->hasFile('filemateri')) {
-             $file = $request->file('filemateri');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('file', $filename);
-        $validated['filemateri'] = $filename;
-}
+        try {
+            $file = $request->file('filemateri');
+            $response = Http::asMultipart()->post(
+                'https://api.cloudinary.com/v1_1/' . env('CLOUDINARY_CLOUD_NAME') . '/raw/upload',
+                [
+                    [
+                        'name'     => 'file',
+                        'contents' => fopen($file->getRealPath(), 'r'),
+                        'filename' => $file->getClientOriginalName(),
+                    ],
+                    [
+                        'name'     => 'upload_preset',
+                        'contents' => env('CLOUDINARY_UPLOAD_PRESET'),
+                    ],
+                ]
+            );
+
+            $result = $response->json();
+            if (isset($result['secure_url'])) {
+                $validated['filemateri'] = $result['secure_url'];
+            } else {
+                return back()->withErrors(['filemateri' => 'Cloudinary upload error: ' . ($result['error']['message'] ?? 'Unknown error')]);
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['filemateri' => 'Cloudinary error: ' . $e->getMessage()]);
+        }
+    }
 
         $materi->update($validated);
 

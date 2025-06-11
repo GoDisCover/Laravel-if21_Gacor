@@ -13,19 +13,28 @@
                     @method('PUT')
                     <div class="card-body">
                         <div class="mb-3">
-                            <label for="mata_kuliah_id" class="form-label">Mata Kuliah ID</label>
-                            <input type="number" class="form-control" name="mata_kuliah_id" value="{{ old('mata_kuliah_id', $materi->mata_kuliah_id) }}">
-                            @error('mata_kuliah_id')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="dosenid" class="form-label">Dosen ID</label>
-                            <input type="number" class="form-control" name="dosenid" value="{{ old('dosenid', $materi->dosenid) }}">
-                            @error('dosenid')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <label for="mata_kuliah_id" class="form-label">Mata Kuliah</label>
+                        <select name="mata_kuliah_id" class="form-control">
+                          @foreach ($matakuliah as $item)
+                            <option value="{{ $item->id }}" {{ old('mata_kuliah_id') == $item->id ? "selected" : null }}> {{ $item->nama }} </option>
+                          @endforeach
+                        </select>
+                        @error('mata_kuliah_id')
+                          <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="dosenid" class="form-label">Dosen</label>
+                        <select name="dosenid" class="form-control">
+                          @foreach ($users as $item)
+                            <option value="{{ $item->id }}" {{ old('dosenid') == $item->id ? "selected" : null }}> {{$item->name}} </option>
+                          @endforeach
+                        </select>
+                        @error('dosenid')
+                          <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                      </div>
                         <div class="mb-3">
                             <label for="pertemuan" class="form-label">Pertemuan</label>
                             <input type="number" class="form-control" name="pertemuan" value="{{ old('pertemuan', $materi->pertemuan) }}">
@@ -41,12 +50,12 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="filemateri" class="form-label">File Materi</label>
-                            <input type="text" class="form-control" name="filemateri" value="{{ old('filemateri', $materi->filemateri) }}">
-                            @error('filemateri')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <label for="filemateri" class="form-label">File Materi</label>
+                        <input type="file" class="form-control" name="filemateri">
+                        @error('filemateri')
+                          <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                      </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
